@@ -32,5 +32,9 @@
     "express-handlebars": "^3.1.0",
     "mongoose": "^5.9.2",
     "serve-favicon": "^2.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ncs2738/Simple-Models-ICE"
   }
 }

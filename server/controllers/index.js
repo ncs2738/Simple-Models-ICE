@@ -84,7 +84,7 @@ const readDog = (req, res) => {
 
     return res.json(doc);
   };
-  
+
   Dog.findByName(name1, callback);
 };
 
@@ -123,12 +123,12 @@ const hostPage2 = (req, res) => {
 // controller functions in Express receive the full HTTP request
 // and a pre-filled out response object to send
 const hostPage3 = (req, res) => {
-    // res.render takes a name of a page to render.
-    // These must be in the folder you specified as views in your main app.js file
-    // Additionally, you don't need .jade because you registered the file type
-    // in the app.js as jade. Calling res.render('index')
-    // actually calls index.jade. A second parameter of JSON can be passed
-    // into the jade to be used as variables with #{varName}
+  // res.render takes a name of a page to render.
+  // These must be in the folder you specified as views in your main app.js file
+  // Additionally, you don't need .jade because you registered the file type
+  // in the app.js as jade. Calling res.render('index')
+  // actually calls index.jade. A second parameter of JSON can be passed
+  // into the jade to be used as variables with #{varName}
   res.render('page3');
 };
 
@@ -217,7 +217,7 @@ const setDogName = (req, res) => {
   const dogData = {
     name,
     breed: req.body.breed,
-    age: req.body.age
+    age: req.body.age,
   };
 
   // create a new object of CatModel with the object to save
@@ -293,10 +293,15 @@ const searchDogName = (req, res) => {
       return res.json({ error: 'No dogs found' });
     }
 
-    doc.age++;
-    doc.save();
+    lastAdded = doc;
+    lastAdded.age++;
+    lastAdded.save();
 
-    return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
+    return res.json({
+      name: lastAdded.name,
+      breed: lastAdded.breed,
+      age: lastAdded.age,
+    });
   });
 };
 
@@ -329,7 +334,11 @@ const updateLast = (req, res) => {
 const updateLastDog = (req, res) => {
   lastAdded.age++;
   const savePromise = lastAdded.save();
-  savePromise.then(() => res.json({ name: lastAdded.name, breed: lastAdded.breed, age: lastAdded.age }));
+  savePromise.then(() => res.json({
+    name: lastAdded.name,
+    breed: lastAdded.breed,
+    age: lastAdded.age,
+  }));
   savePromise.catch((err) => res.status(500).json({ err }));
 };
 
