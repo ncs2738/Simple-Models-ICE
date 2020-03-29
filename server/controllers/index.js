@@ -56,7 +56,7 @@ const readDog = (req, res) => {
 const hostPage1 = (req, res) => {
   const callback = (err, docs) => {
     if (err) {
-      return res.status(500).json({ err }); 
+      return res.status(500).json({ err });
     }
 
     return res.render('page1', { cats: docs });
@@ -115,13 +115,11 @@ const setName = (req, res) => {
 
 
 const setDogName = (req, res) => {
-  if (!req.body.firstname || !req.body.lastname || !req.body.breed || !req.body.age) {
-    return res.status(400).json({ error: 'firstname, lastname, breed, and age are all required' });
+  if (!req.body.name || !req.body.breed || !req.body.age) {
+    return res.status(400).json({ error: 'name, breed, and age are all required' });
   }
-  const name = `${req.body.firstname} ${req.body.lastname}`;
-
   const dogData = {
-    name,
+    name: req.body.name,
     breed: req.body.breed,
     age: req.body.age,
   };
@@ -191,17 +189,6 @@ const updateLast = (req, res) => {
   savePromise.catch((err) => res.status(500).json({ err }));
 };
 
-const updateLastDog = (req, res) => {
-  lastAdded.age++;
-  const savePromise = lastAdded.save();
-  savePromise.then(() => res.json({
-    name: lastAdded.name,
-    breed: lastAdded.breed,
-    age: lastAdded.age,
-  }));
-  savePromise.catch((err) => res.status(500).json({ err }));
-};
-
 const notFound = (req, res) => {
   res.status(404).render('notFound', {
     page: req.url,
@@ -220,7 +207,6 @@ module.exports = {
   setName,
   setDogName,
   updateLast,
-  updateLastDog,
   searchName,
   searchDogName,
   notFound,

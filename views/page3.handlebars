@@ -8,7 +8,7 @@
   <title>{{title}}</title>
 </head>
 <body>
-  <h1>Welcome to page 3</h1>
+  <h1>Add a new dog</h1>
   
   <!-- links or URLs are always GET resources as they are getting (retrieving) a resource -->
   <a href="/">Home</a>
@@ -17,23 +17,13 @@
   <a href="/page4">Page 4</a>
 
     <form action="/setDogName" method="POST">
-    <label for="firstname">First name:</label>
-    <input type="text" name="firstname" value="">
-    <label for="lastname">Last Name: </label>
-    <input type="text" name="lastname" value="">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="">
     <label for="breed">Breed: </label>
     <input type="text" name="breed" value="">
     <label for="age">Age:</label>
     <input type="number" name="age" value="">
     <input type="submit" value="submit">
-  </form>
-  
-  <br/>
-  <br/>
-  
-
-  <form action="/updateLastDog" method="POST">
-    <input type="submit" value="Update Last">
   </form>
   
   <br/>
